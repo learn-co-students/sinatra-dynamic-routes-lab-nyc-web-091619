@@ -38,4 +38,28 @@ class App < Sinatra::Base
    
     erb :'fivewords'
   end
+
+  get '/:operation/:number1/:number2' do
+    @operation = params[:operation]
+    @term1 = params[:number1].to_i
+    @term2 = params[:number2].to_i
+    @return_value = nil
+
+    case 
+      when @operation == "add"
+        @return_value = @term1 + @term2
+        
+      when @operation == "subtract"
+        @return_value = @term1 - @term2
+
+      when @operation == "divide"
+        @return_value = @term1 / @term2
+
+      when @operation == "multiply"
+        @return_value = @term1 * @term2
+    else
+      @return_value = "That is not a valid operation."
+    end 
+    erb :'dealers_choice'
+  end
 end
